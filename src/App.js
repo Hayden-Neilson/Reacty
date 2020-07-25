@@ -12,11 +12,17 @@ class App extends Component {
     ]
   }
 
+  switchNameHandler = () => {
+    console.log("was clicked");
+  }
+
 }
+
+render() {
   return (
     <div className="App">
       <h1>Hi I'm a react app</h1>
-      <button>Switch Name</button>
+      <button onClick={this.switchNameHandler}>Switch Name</button>
       <img src={logo} className="App-logo" alt="logo" />
       <p>This is really working</p>
       <Person name="max" age="17" />
@@ -24,6 +30,6 @@ class App extends Component {
       <Person name="betty" age="37" />
     </div>
   );
-}
+};
 
 export default App;
