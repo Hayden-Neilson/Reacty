@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Person from "./Person/person";
 
 class App extends Component {
   state = {
@@ -13,7 +14,13 @@ class App extends Component {
   }
 
   switchNameHandler = () => {
-    console.log("was clicked");
+    // console.log("was clicked");
+    this.setState({
+      persons: [
+        { name: "Max", age: 28 },
+        { name: "george", age: 54 },
+        { name: "betty", age: 37 };
+    })
   }
 
 }
@@ -21,13 +28,12 @@ class App extends Component {
 render() {
   return (
     <div className="App">
-      <h1>Hi I'm a react app</h1>
-      <button onClick={this.switchNameHandler}>Switch Name</button>
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>This is really working</p>
-      <Person name="max" age="17" />
-      <Person name="george" age="54" />
-      <Person name="betty" age="37" />
+      <h1>Hi Im a react app</h1>
+      <button onClick={this.switchNameHandler}>Switch Name</button>;
+      <p>This is really working</p>;
+      <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
+      <Person name={this.state.persons[1].name} age={this.state.persons[1].age}/>   
+      <Person name={this.state.persons[2].name} age={this.state.persons[2].age}/>
     </div>
   );
 };
