@@ -10,18 +10,19 @@ class App extends Component {
       { name: "george", age: 54 },
       { name: "betty", age: 37 },
     ],
+    showPersons: false,
   };
 
-  switchNameHandler = () => {
-    // console.log("was clicked");
-    this.setState({
-      persons: [
-        { name: "Max", age: 28 },
-        { name: "george", age: 54 },
-        { name: "betti", age: 78 },
-      ],
-    });
-  };
+  // switchNameHandler = () => {
+  //   // console.log("was clicked");
+  //   this.setState({
+  //     persons: [
+  //       { name: "Max", age: 28 },
+  //       { name: "george", age: 54 },
+  //       { name: "betti", age: 78 },
+  //     ],
+  //   });
+  // };
 
   nameChangedHandler = (event) => {
     this.setState({
@@ -33,28 +34,35 @@ class App extends Component {
     });
   };
 
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({ showPersons: !doesShow });
+  };
+
   render() {
     return (
       <div className="App">
         <h1>Hi Im a react app</h1>
-        <button onClick={this.switchNameHandler("maximillan")}>
-          Switch Name
-        </button>
+        <button onClick={this.togglePersonsHandler}>Switch Name</button>
         <p>This is really working</p>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-        />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, "max")}
-          changed={this.nameChangedHandler.bind(this)}
-        />
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-        />
+        {this.state.showPersons === true ? (
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+            />
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={this.switchNameHandler.bind(this, "max")}
+              changed={this.nameChangedHandler.bind(this)}
+            />
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}
+            />
+          </div>
+        ) : null}
       </div>
     );
   }
