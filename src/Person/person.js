@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import "./Person.scss";
+import "./Person.ccss";
 const Person = (props) => {
   return (
     <div className="Person">
