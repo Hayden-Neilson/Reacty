@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
-import "./Person.ccss";
+import "./Person.css";
 const Person = (props) => {
   return (
     <div className="Person">
