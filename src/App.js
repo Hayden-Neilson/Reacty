@@ -24,7 +24,7 @@ class App extends Component {
   // };
 
   nameChangedHandler = (event, id) => {
-    const personIndex = this.state.person.findIndex((p) => {
+    const personIndex = this.state.persons.findIndex((p) => {
       return p.id === id;
     });
 
@@ -54,18 +54,26 @@ class App extends Component {
   };
 
   render() {
+    const style = {
+      backgroundColor: "white",
+      font: "inherit",
+      border: "1px solid blue",
+      padding: "8px",
+      cursor: "pointer",
+    };
+
     let persons = null;
 
     if (this.state.showPersons === true) {
       persons = (
         <div>
-          {this.state.showPersons.map((person, index) => {
+          {this.state.persons.map((person, index) => {
             return (
               <Person
-                click={this.deletePersonHandler(index)}
-                name={persons.name}
-                age={persons.age}
-                key={persons.id}
+                click={() => this.deletePersonHandler(index)}
+                name={person.name}
+                age={person.age}
+                key={person.id}
                 changed={(event) => this.nameChangedHandler(event, person.id)}
               />
             );
@@ -77,9 +85,11 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hi Im a react app</h1>
-        <button onClick={this.togglePersonsHandler}>Toggle Name</button>
         <p>This is really working</p>
-        {Person}
+        <button style={style} onClick={this.togglePersonsHandler}>
+          Toggle Name
+        </button>
+        {persons}
       </div>
     );
   }
