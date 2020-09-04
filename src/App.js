@@ -84,10 +84,17 @@ class App extends Component {
       style.backgroundColor = "red";
     }
 
+    let classes = [];
+    if (thid.state.persons.length <= 2) {
+      classes.push("red");
+    }
+    if (thid.state.persons.length <= 2) {
+      classes.push("bold");
+    }
     return (
       <div className="App">
         <h1>Hi Im a react app</h1>
-        <p>This is really working</p>
+        <p className={classes.join(" ")}>This is really working</p>
         <button style={style} onClick={this.togglePersonsHandler}>
           Toggle Name
         </button>
@@ -140,8 +147,7 @@ export default App;
 //   );
 // };
 
-{
-  /* 
+/* 
           <Person
             name={this.state.persons[0].name}
             age={this.state.persons[0].age}
@@ -156,4 +162,3 @@ export default App;
             name={this.state.persons[2].name}
             age={this.state.persons[2].age}
           /> */
-}
