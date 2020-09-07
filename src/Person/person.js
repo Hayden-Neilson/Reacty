@@ -1,9 +1,12 @@
 import React from "react";
-import radium from "radium";
-
-import "./Person.css";
 import Radium from "radium";
+import "./Person.css";
 const Person = (props) => {
+  const style = {
+    "@media (min-width: 500px)": {
+      width: "450px",
+    },
+  };
   return (
     <div className="Person">
       <p>
