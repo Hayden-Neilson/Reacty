@@ -1,8 +1,22 @@
 import React, { Component } from "react";
 import "./App.css";
-import style from "style-components";
+import styled from "styled-components";
 // import Radium, { StyleRoot } from "radium";
 import Person from "./Person/Person";
+
+const StyledButton = styled.button`      backgroundColor: "blue",
+      background-color: blue;
+      color: white;
+      font: inherit;
+      border: 1px solid blue;
+      padding: 8px;
+      cursor: pointer;
+
+      &:hover: {
+        backgroun-color: lightgreen;
+        color: black;
+      }
+`;
 
 class App extends Component {
   state = {
@@ -95,19 +109,19 @@ class App extends Component {
     }
 
     let classes = [];
-    if (thid.state.persons.length <= 2) {
+    if (this.state.persons.length <= 2) {
       classes.push("red");
     }
-    if (thid.state.persons.length <= 2) {
+    if (this.state.persons.length <= 2) {
       classes.push("bold");
     }
     return (
       <div className="App">
         <h1>Hi Im a react app</h1>
         <p className={classes.join(" ")}>This is really working</p>
-        <button style={style} onClick={this.togglePersonsHandler}>
+        <StyledButton onClick={this.togglePersonsHandler}>
           Toggle Name
-        </button>
+        </StyledButton>
         {persons}
       </div>
     );
