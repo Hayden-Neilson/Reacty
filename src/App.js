@@ -1,64 +1,40 @@
-import React, { Component } from "react";
-import "./App.css";
-import styled from "styled-components";
-// import Radium, { StyleRoot } from "radium";
-import Person from "./Person/Person";
+import React, { Component } from 'react';
 
-const StyledButton = styled.button`      backgroundColor: "blue",
-      background-color: blue;
-      color: white;
-      font: inherit;
-      border: 1px solid blue;
-      padding: 8px;
-      cursor: pointer;
-
-      &:hover: {
-        backgroun-color: lightgreen;
-        color: black;
-      }
-`;
+import classes from './App.css';
+import Person from './Person/Person';
 
 class App extends Component {
   state = {
     persons: [
-      { id: "1", name: "Max", age: 28 },
-      { id: "2", name: "george", age: 54 },
-      { id: "3", name: "betty", age: 37 },
+      { id: 'asfa1', name: 'Max', age: 28 },
+      { id: 'vasdf1', name: 'Manu', age: 29 },
+      { id: 'asdf11', name: 'Stephanie', age: 26 }
     ],
-    showPersons: false,
+    otherState: 'some other value',
+    showPersons: false
   };
 
-  // switchNameHandler = () => {
-  //   // console.log("was clicked");
-  //   this.setState({
-  //     persons: [
-  //       { name: "Max", age: 28 },
-  //       { name: "george", age: 54 },
-  //       { name: "betti", age: 78 },
-  //     ],
-  //   });
-  // };
-
   nameChangedHandler = (event, id) => {
-    const personIndex = this.state.persons.findIndex((p) => {
+    const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
     });
 
     const person = {
-      ...this.state.persons[personIndex],
+      ...this.state.persons[personIndex]
     };
+
+    // const person = Object.assign({}, this.state.persons[personIndex]);
 
     person.name = event.target.value;
 
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({
-      persons: persons,
-    });
+    this.setState({ persons: persons });
   };
 
-  deletePersonHandler = (personIndex) => {
+  deletePersonHandler = personIndex => {
+    // const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({ persons: persons });
@@ -70,22 +46,10 @@ class App extends Component {
   };
 
   render() {
-    const style = {
-      backgroundColor: "blue",
-      color: "white",
-      font: "inherit",
-      border: "1px solid blue",
-      padding: "8px",
-      cursor: "pointer",
-      ":hover": {
-        backgroundColor: "lightgreen",
-        color: "black",
-      },
-    };
-
     let persons = null;
+    let btnClass = '';
 
-    if (this.state.showPersons === true) {
+    if (this.state.showPersons) {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
@@ -95,98 +59,36 @@ class App extends Component {
                 name={person.name}
                 age={person.age}
                 key={person.id}
-                changed={(event) => this.nameChangedHandler(event, person.id)}
+                changed={event => this.nameChangedHandler(event, person.id)}
               />
             );
           })}
         </div>
       );
-      style.backgroundColor = "red";
-      style[":hover"] = {
-        backgroundColor: "lightred",
-        color: "black",
-      };
+
+      btnClass = classes.Red;
     }
 
-    let classes = [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push("red");
+      assignedClasses.push(classes.red); // classes = ['red']
     }
-    if (this.state.persons.length <= 2) {
-      classes.push("bold");
+    if (this.state.persons.length <= 1) {
+      assignedClasses.push(classes.bold); // classes = ['red', 'bold']
     }
+
     return (
-      <div className="App">
-        <h1>Hi Im a react app</h1>
-        <p className={classes.join(" ")}>This is really working</p>
-        <StyledButton onClick={this.togglePersonsHandler}>
-          Toggle Name
-        </StyledButton>
+      <div className={classes.App}>
+        <h1>Hi, I'm a React App</h1>
+        <p className={assignedClasses.join(' ')}>This is really working!</p>
+        <button className={btnClass} onClick={this.togglePersonsHandler}>
+          Toggle Persons
+        </button>
         {persons}
       </div>
     );
+    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 
 export default App;
-
-{
-  /* <StyleRoot></StyleRoot> */
-}
-
-// const app = (props) => {
-//   const [personsState, setPersonsState] = {
-//     persons: [
-//       { name: "Max", age: 28 },
-//       { name: "george", age: 54 },
-//       { name: "betty", age: 37 },
-//     ],
-//   };
-
-//   const switchNameHandler = () => {
-//     // console.log("was clicked");
-//     setPersonsState({
-//       persons: [
-//         { name: "Maxy", age: 28 },
-//         { name: "george", age: 54 },
-//         { name: "betty", age: 89 },
-//       ],
-//     });
-//   };
-
-//   return (
-//     <div className="App">
-//       <h1>Hi Im a react app</h1>
-//       <button onClick={switchNameHandler}>Switch Name</button>;
-//       <p>This is really working</p>;
-//       <Person
-//         name={personsState.persons[0].name}
-//         age={personsState.persons[0].age}
-//       />
-//       <Person
-//         name={personsState.persons[1].name}
-//         age={personsState.persons[1].age}
-//       />
-//       <Person
-//         name={personsState.persons[2].name}
-//         age={personsState.persons[2].age}
-//       />
-//     </div>
-//   );
-// };
-
-/* 
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}
-          />
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this, "max")}
-            changed={this.nameChangedHandler.bind(this)}
-          />
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age}
-          /> */
