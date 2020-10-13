@@ -6,7 +6,11 @@ const cockpit = (props) => {
   useEffect(() => {
     console.log("[cockpit js] useEffect ");
     // is a combo of component did update and a combo of component did mount
-  });
+
+    setTimeout(() => {
+      alert("put info in the cloud");
+    }, 1000);
+  }, []);
 
   const assignedClasses = [];
   let btnClass = "";
