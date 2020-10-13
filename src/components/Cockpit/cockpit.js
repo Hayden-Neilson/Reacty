@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import classes from "./Cockpit.css";
 
 const cockpit = (props) => {
+  useEffect(() => {
+    console.log("[cockpit js] useEffect ");
+    // is a combo of component did update and a combo of component did mount
+  });
+
   const assignedClasses = [];
   let btnClass = "";
   if (props.showPersons) {
